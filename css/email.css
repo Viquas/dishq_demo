@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+body,p,h1,h2,h3,h4,h5,h6, a, span{
+font-family: 'Roboto', sans-serif;
+color: #6b7a8c;
+
+}
+body{
+  background: #f6f5fb;
+  padding: 20px 0px;
+}
+.w-email{
+  width: 600px;
+  margin: auto;
+  background: white;
+  margin: 10px auto;
+  box-shadow: 0px 0px 15px #e4e4e4;
+  border-radius: 10px;
+}
+
+.green-header{
+  color:#8ac561;
+  letter-spacing: 1px;
+}
+
+.im-bg{
+  margin: 30px 0px;
+  height: 150px;
+  text-align: center;
+  padding: 7px 0px;
+  background-image: url("http://dishq.in/images/email/background.png");
+}
+.main{
+  color:white;
+}
+.content{
+  line-height: 1.8em;
+}
+.demo-button{
+  background: white;
+  padding: 10px 40px;
+  box-shadow: 0px 0px 15px #76a14e;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin-top:5px;
+}
+
+.demo-button:hover{
+  box-shadow: 0px 0px 35px #5e813c;
+
+}
+.link{
+  color: #7ab9ff;
+  text-decoration: underline;
+}
+.left-list {
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+}
+.left-list>li {
+    display: inline;
+    padding: 5px;
+    color: #c4c9d0;
+}
+.left-list>li>a {
+  color: #c4c9d0;
+}
+
+.left-list>li>a:hover{
+  color: #6b7a8c;
+}
+.unsub{
+  font-weight: 300;
+  font-size: 12px;
+  color: #9ca8ae;
+  text-align: center;
+  margin: auto;
+}

@@ -1,0 +1,716 @@
+@import "http://getbootstrap.com/dist/css/bootstrap.css";
+body {
+
+    overflow-x: hidden
+}
+body,p,h1,h2,h3,h4,h5,h6, a, span{
+font-family: 'Roboto', sans-serif;
+color: #454545;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden
+}
+
+.home__item__device {
+    position: relative;
+    text-align: center
+}
+.video_play {
+    width: 40px;
+    height: 40px
+}
+#tv_container {
+    width: 360px;
+    height: 800px;
+    position: relative
+}
+#tv_container:after {
+    content: '';
+    display: block;
+    background: url('../images/phone.png') no-repeat top left transparent;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 350px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    z-index: 10
+}
+#tv_container video {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    z-index: 5
+}
+.ham {
+    padding: 30px 0px 0px 20px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 100
+}
+p.logo {
+    display: inline
+}
+.navbar-header {
+    width: 100%
+}
+.navbar-brand {
+    left: 45%;
+    padding-top: 10px;
+    position: absolute;
+    text-align: center
+}
+.img-logo {
+    width: 100px;
+    margin: auto
+}
+.side-nav {
+    position: absolute;
+    bottom: 30px;
+    left: 84px
+}
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1031;
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 7px 0px 3px rgba(0, 0, 0, 0.1)
+}
+.green {
+    color: #8ac651;
+}
+.green:hover {
+    color: #91d651;
+}
+.link-bottom {
+  padding-left: 10px;
+  margin: auto;
+    margin-top: 40%;
+
+    display: inline;
+    height: 100%;
+    list-style: none
+}
+.link-bottom > li {
+    bottom: 10px;
+    display: inline;
+    margin-left: 2px;
+}
+.link-bottom > li > a {
+    display: inline
+}
+.sidenav a {
+    padding: 18px 8px 0px 10px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #8ac651;
+    display: block;
+    transition: 0.3s;
+    text-align: center;
+    font-weight: 500
+}
+.sidenav a:hover,
+.offcanvas a:focus {
+    color: rgba(138, 198, 81, 0.8);
+    color: #7fba48
+}
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px
+}
+#main {
+    transition: margin-left .5s;
+    padding: 16px
+}
+.rounded-image {
+    border-radius: 15px;
+    box-shadow: -8px 6px 10px 1px rgba(0, 0, 0, 0.3)
+}
+a.c-link{
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 19px;
+}
+@media screen and (max-height: 450px) {
+
+  .side-nav {
+
+      left: 34px
+  }
+    .sidenav {
+        padding-top: 15px
+    }
+    .sidenav a {
+        font-size: 18px
+    }
+}
+
+.home__item__video {
+    display: inline-block;
+    margin: 0 auto -1rem;
+    position: relative;
+    vertical-align: middle
+}
+section {
+    margin: 60px auto 0px auto
+}
+
+.navbar {
+    height: 55px
+}
+.navbar-inverse {
+    background-color: #8ac651;
+    border-color: #8ac651
+}
+.navbar-brand {
+    height: 50px;
+    padding: 5px 15px;
+    margin: auto
+}
+.container-full {
+    width: 100%
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: white
+}
+.navbar-inverse {
+    background-color: #8ac651;
+    border-color: #8ac651
+}
+.navbar-inverse .navbar-brand {
+    color: #fff
+}
+.right-link {
+    text-align: left;
+    bottom: 30px
+}
+.left-link {
+    text-align: right;
+    bottom: 0px
+}
+.middle-link {
+    text-align: center;
+    bottom: 0px
+}
+.links {
+    line-height: 30px;
+    font-weight: 500
+}
+.footer-section {
+    margin: 20px auto;
+    color: white;
+}
+footer{
+  background: #8ac561;
+}
+.white{
+  color: white !important;
+}
+a:hover {
+    color: rgba(0, 0, 0, 0.5)
+}
+.address {
+    font-size: 16px;
+    letter-spacing: 1px;
+    line-height: 22px;
+    bottom: 0px;
+    font-weight: 200
+}
+.privacy {
+    text-align: right;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 7px
+}
+.email {
+    text-align: left
+}
+.big-text {
+    padding: 30px 0px 0px 0px;
+    font-size: 60px;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: 500
+}
+.left-list {
+    padding-left: 0px;
+    list-style: none;
+    text-align: left
+}
+.left-list > li {
+    display: inline;
+    padding: 5px;
+    text-align: left
+}
+.sub {
+    font-size: 20px;
+    text-align: left
+}
+.headline {
+    font-size: 35px;
+    text-align: left;
+    padding: 8px 0px
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none
+}
+.navbar-icons {
+    list-style: none;
+    display: inline;
+    padding: 12px 0px;
+    float: right
+}
+ul.navbar-icons li {
+    padding: 10px 10px;
+    display: inline
+}
+.playstore {
+    max-width: 100px;
+    vertical-align: middle;
+    margin-top: -11px;
+    display: none;
+    overflow: hidden
+}
+.play_button {
+    margin: auto;
+    max-width: 200px
+}
+.links:hover {
+    text-decoration: none
+}
+.mob-right {
+    max-height: 620px;
+    float: right
+}
+.mob-left {
+    max-height: 620px;
+    float: left
+}
+.oreo {
+    max-width: 320px;
+    margin-top: -250px;
+    overflow: hidden
+}
+.breakfast {
+    max-width: 580px;
+    margin-left: -120px;
+    overflow: hidden
+}
+.mushroom {
+    max-width: 350px;
+    margin-right: -80%;
+    margin-top: -10%;
+    margin-bottom: -15%;
+    overflow: hidden
+}
+.bag {
+    max-width: 500px;
+    margin: auto
+}
+.pizza {
+    max-width: 480px;
+    margin-left: -140px;
+    margin-top: -250px;
+    overflow: hidden
+}
+.salad {
+    max-width: 680px;
+    margin-right: -30%;
+    margin-top: -70%;
+    overflow: hidden
+}
+.coffee {
+    max-width: 480px;
+    margin-top: -20px;
+    margin-bottom: -250px
+}
+.gap {
+    margin: 90px 0px 0px 0px
+}
+.gap1 {
+    margin-top: 100px
+}
+.gap2 {
+    margin: 50px 0px
+}
+.gap3 {
+    margin: 0px 0px 90px 0px
+}
+.mock {
+    padding: 40px 0px
+}
+.center-text {
+    text-align: center;
+    padding: 0px 0px 40px 0px
+}
+.main-text {
+    text-align: center;
+    padding: 20px 0px
+}
+.lists {
+    font-size: 25px;
+    padding: 10px 0px;
+    font-weight: 500;
+    margin: auto;
+    text-align: left
+}
+.about-left {
+    text-align: right;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 80px
+}
+.left-font {
+    font-size: 20px;
+    line-height: 30px;
+    padding: 10px 0px;
+    margin: auto;
+    font-weight: 200;
+    text-align: left
+}
+.list_detail {
+    font-size: 16px;
+    padding: 5px 0px;
+    font-weight: 300;
+    text-align: left
+}
+.list_center {
+    font-size: 23px;
+    padding: 10px 0px;
+    font-weight: 500;
+    text-align: left
+}
+.list_title {
+    font-size: 30px;
+    padding: 10px 0px;
+    font-weight: 500;
+    text-align: center
+}
+.career {
+    font-weight: 500;
+    color: black;
+}
+.career:hover {
+    text-decoration: none;
+    cursor: pointer
+}
+.entry-content {
+    margin: 40px auto
+}
+.entry-content > p {
+    font-size: 16px;
+    font-weight: 300
+}
+.entry-content ol > li {
+    font-size: 17px;
+    font-weight: 300;
+    color: white
+}
+.link-mail{
+  color:#333;
+  font-weight:400;
+}
+.link-mail:hover{
+  text-decoration: none;
+}
+.press-title{
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1px;
+  padding: 10px 0px;
+  text-align: center;
+}
+.press-img{
+  max-width: 100px;
+}
+.card {
+    margin-top: 10px;
+    font-size: 1em;
+    overflow: hidden;
+    padding: 0;
+    border: none;
+    border-radius: .28571429rem;
+    box-shadow: 0 3px 3px 1px #d4d4d5, 0 0 0 1px #d4d4d5;
+    transition: 0.5s;
+}
+.card:hover{
+  box-shadow: 0 4px 4px 3px #d4d4d5, 0 0 0 1px #d4d4d5;
+
+}
+.card-link{
+  text-decoration: none;
+  cursor: pointer;
+}
+.card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    border-top: 1px solid rgba(34, 36, 38, .1);
+    box-shadow: none;
+}
+
+.card-img-top {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.card-title {
+    font-size: 1.28571429em;
+    font-weight: 700;
+    line-height: 1.2857em;
+}
+
+.card-text {
+    clear: both;
+    margin-top: .5em;
+    color: rgba(0, 0, 0, .68);
+}
+
+.card-footer {
+    font-size: 1em;
+    position: static;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    padding: .75em 1em;
+    color: rgba(0, 0, 0, .4);
+    border-top: 1px solid rgba(0, 0, 0, .05) !important;
+    background: #fff;
+}
+
+.card-inverse .btn {
+    border: 1px solid rgba(0, 0, 0, .05);
+}
+
+
+@media (max-width: 400px) {
+  .side-nav {
+      left: 34px;
+  }
+  .wrapper-after .img-bird-wrapper, .wrapper-before .img-bird-wrapper {
+      position: absolute;
+      left: 0;
+      right: 0;
+      /*margin: -250px auto 0;*/
+       top: 60%;
+
+      z-index: 9;
+  }
+  .img-bird-wrapper {
+    max-width: 230px;
+}
+    .sidenav a {
+        font-size: 25px
+    }
+    .navbar-brand {
+        left: 10%;
+        width: 80px
+    }
+    .img-logo {
+        width: 80px;
+        margin-top: 10px;
+        margin-left: -10px
+    }
+    .navbar-icons {
+        list-style: none;
+        display: inline;
+        padding: 20px 0px
+    }
+    ul.navbar-icons li {
+        padding: 10px 5px;
+        display: inline
+    }
+}
+
+@media only screen and (max-width: 768px) {
+  .side-nav {
+      left: 34px
+  }
+  a.c-link{
+    padding: 10px 0px;
+    margin-left: 0px;
+    font-size: 19px;
+  }
+    .left-font {
+        font-size: 23px;
+        line-height: 30px;
+        padding: 10px 0px;
+        margin: auto;
+        font-weight: 200;
+        text-align: left
+    }
+    .playstore {
+        margin-top: 0px
+    }
+    .navbar-brand {
+        left: 35%
+    }
+    .about-left {
+        text-align: center;
+        font-size: 35px;
+        line-height: 40px;
+        padding: 15px 0px
+    }
+    .lists {
+        text-align: center
+    }
+    .bag {
+        max-width: 280px;
+        margin: auto
+    }
+    .mob-right {
+        max-height: 380px;
+        float: none;
+        margin: auto
+    }
+    .mob-left {
+        max-height: 380px;
+        float: none;
+        margin: auto
+    }
+    .play_button {
+        display: block;
+        margin: 0 auto
+    }
+    ul.navbar-right {
+        display: inline;
+        text-align: right
+    }
+    .headline {
+        text-align: center;
+        padding: 0px 10px
+    }
+    .right-link {
+        text-align: center
+    }
+    .big-text {
+        padding: 10px 0px;
+        font-size: 40px;
+        font-weight: 700
+    }
+    .address {
+        text-align: center;
+        margin: 15px auto;
+        margin-bottom: 20px
+    }
+    .left-list {
+        text-align: center;
+        margin: 10px auto;
+        padding: 0px
+    }
+    .left-list > li {
+        text-align: center
+    }
+    .email {
+        margin: 5px auto;
+        text-align: center
+    }
+    .privacy {
+        text-align: center
+    }
+    .sub {
+        text-align: center
+    }
+    .right-link {
+        text-align: center
+    }
+    .left-link {
+        text-align: center
+    }
+    .middle-link {
+        text-align: center
+    }
+    .container-full {
+        text-align: center
+    }
+    .nav>li {
+        position: relative;
+        display: inline
+    }
+    .collapse {
+        display: block
+    }
+    .gap {
+        margin: 40px 0px
+    }
+    .home__item__video {
+        display: none
+    }
+}
+@media only screen and (min-width: 37.5625rem) {
+
+
+    .home__item--remixlive .home__item__device {
+        right: -40%
+    }
+    .home__item--remixlive .home__item__device img {
+        max-width: none;
+        width: 125%
+    }
+    .home__item__video {
+        display: none
+    }
+}
+@media only screen and (min-width: 48.0625rem) {
+    .home__item__video {
+        display: inline-block;
+        margin: 0 auto -1rem;
+        position: relative;
+        vertical-align: middle
+    }
+    .home__item__video>video {
+        border-radius: 0.1rem;
+        box-sizing: border-box;
+        border: rgba(17, 17, 17, 0.1) 0.1rem solid;
+        position: absolute;
+        width: calc(56.5% + 0.2rem);
+        height: auto;
+        -webkit-transform: rotate(-20deg);
+        -ms-transform: rotate(-20deg);
+        transform: rotate(-20deg);
+        margin: -41% 0 0 -28%;
+        left: 50%;
+        top: 43%
+    }
+    .home__item--even .home__item__video>video {
+        margin: -36% 0 0 -23.5%;
+        -webkit-transform: rotate(18deg);
+        -ms-transform: rotate(18deg);
+        transform: rotate(18deg)
+    }
+    .home__item--remixlive .home__item__video>video {
+        margin: -14.5% 0 0 -27.5%;
+        -webkit-transform: rotate(34deg);
+        -ms-transform: rotate(34deg);
+        transform: rotate(34deg);
+        width: calc(82% + 0.2rem)
+    }
+}
+@media only screen and (min-width: 48.0625rem) {
+    .home__item--has-video .home__item__phone {
+        display: none
+    }
+}
+@media only screen and (max-width: 37.5rem) {
+    .home__item__device .home__item__phone {
+        margin-bottom: 0.8rem
+    }
+}
