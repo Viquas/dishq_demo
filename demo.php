@@ -16,10 +16,9 @@
     <div class="row">
        <div class="col-sm-12" >
          <h1 class="big bold-text green-text">Welcome</h1>
-         <p class="general-text text-center"> A typical restaurant's menu is often compounded. Seeing a list of dishes that a user may or may not prefer is uninspiring
-        in making proper choices. Below, we share menus of two restaurants (Indian and International restaurants)
+         <p class="general-text text-center"> You're about to see how we do personalisation. How using our API delivers intelligent food recommendations to your users. And how you gain incremental revenue through better conversion, basket size and/or retention.
         <br/>
-        <b>More Context goes here</b>
+
       </p>
       <p class="text-center">
         <a href="" class="btn g-button" ng-click="start();"> Let's get started </a>
@@ -37,28 +36,24 @@
            <div class="box-1"  >
            <div class="toolbox r">
             <p class="message-box ">
-              Scroll the menu type to select the dish types.<br/><br/>
+              You can scroll between the menu courses<br/><br/>
             </p>
-              <span class="next " ng-click="step2();" id="next1">Next </span>
+              <span class="next " ng-click="step3();" id="next1">Next </span>
           </div>
           </div>
 
           <div class="help">
             <p class="help-msg" id="help1">
-              <b>HELP MESSAGE HERE</b><br/>
-              Lorem Ipsumm Neque porro quisquam est qui
-               dolorem ipsum quia dolor sit amet,
-               consectetur, adipisci velit...
-               <br/>
-               <br/>
 
-               Lorem Ipsumm Neque porro quisquam est qui
-                dolorem ipsum quia dolor sit amet,
-                consectetur, adipisci velit...
+              This is your typical food app. Users see a choice of restaurants and dishes. And everyone sees the same thing. So making a good choice is time consuming, hard and risky.
+              <br/>
+              <br/>
+
+
             </p>
             <p class="text-center" >
               <span class="help-msg" id="p_text">
-                If you are done playing around<br/>
+                When you're ready...<br/>
                 <br/>
                 <br/>
               </span>
@@ -80,24 +75,15 @@
         <div class="box-2">
         <div class="toolbox l ">
           <p class="message-box ">
-          You may change restaurant menu from
-          (Indian/International) from this tab
+          You can choose another restaurant menu from this tab.
         </p>
-        <span class="next" ng-click="step3();" id="next2"> Next </span>
+        <span class="next" ng-click="step2();" id="next2"> Next </span>
         </div>
         </div>
 
         <p class="help-msg " id="help2">
-          <b>HELP MESSAGE HERE</b><br/>
-          Lorem Ipsumm Neque porro quisquam est qui
-           dolorem ipsum quia dolor sit amet,
-           consectetur, adipisci velit...
-           <br/>
-           <br/>
+                     No one wants to eat food they don't like. And each of our tastes are unique as our fingerprint. So giving users relevant choices is crucial to ensuring a food and brand experience.
 
-           Lorem Ipsumm Neque porro quisquam est qui
-            dolorem ipsum quia dolor sit amet,
-            consectetur, adipisci velit...
         </p>
       </div>
     </div>
@@ -111,7 +97,7 @@
     <div class="row row-fluid">
       <div class="col-lg-3 like-section" id="like_section">
         <div class="marg-section">
-        <h2 class="text-center"> Your like</h2>
+        <h2 class="text-center"> Your likes</h2>
           <div class="l-box" ng-repeat="f in fav">
             <div class="row center">
               <div class="col-sm-2">
@@ -135,10 +121,11 @@
 
       </div>
 
-      <div class="col-lg-6   text-center" id="input_section">
+      <div class="col-lg-6   text-center" id="input_section" >
         <div class="" id="like_sec" >
-          <h3 class="big"> Enter 6 dishes you like.</h3>
-          <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search" ng-change="searchDishes(0)"  ></input>
+          <h2 class="big"> Enter 6 dishes you like.</h2>
+          <h4 class="mid-text text-center"> <span class='count'> {{favCount}}</span> {{fav_text}}</h5>
+          <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search" ng-change="searchDishes(0)"  ng-disabled="fav_done"></input>
 
           <span class="tt-dropdown-menu"  ng-show="showResult">
 
@@ -166,8 +153,9 @@
           </div>
 
           <div class="" id="dislike_sec">
-            <h3 class="big"> Enter dishes you dislike.</h3>
-            <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search_d" ng-change="searchDishes(1)"  ></input>
+            <h3 class="big"> Add a dish you really don't like.</h3>
+            <h4 class="mid-text text-center"> <span class='count'> {{dislikeCount}}</span> {{dislike_text}}</h5>
+            <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search_d" ng-change="searchDishes(1)"  ng-disabled="dislike_done"></input>
             <span class="tt-dropdown-menu"  ng-show="showResult_d">
                     <div class="tt-dataset-2" style="display: block;">
                       <span class="tt-suggestions" >
@@ -284,7 +272,7 @@
                  </td>
                 </tr>
                 <tr>
-                  <td class="first" width="40%"><p class="match">cooking style   </td>
+                  <td class="first" width="40%"><p class="match">Cooking style   </td>
                   <td class="second"><div class="progress">
                     <div class="progress-bar green-bar" role="progressbar" aria-valuenow="70"
                     aria-valuemin="0" aria-valuemax="100" style="width:{{selected_card.match_score.ingredient_cooking_style_match_score * 100 | number : 0}}%">
@@ -293,7 +281,7 @@
                  </td>
                 </tr>
                 <tr>
-                  <td class="first" width="40%"><p class="match">Ingredient Matchscore </td>
+                  <td class="first" width="40%"><p class="match">Ingredient Match Score </td>
                   <td class="second"><div class="progress">
                     <div class="progress-bar green-bar" role="progressbar" aria-valuenow="70"
                     aria-valuemin="0" aria-valuemax="100" style="width:{{selected_card.match_score.ingredient_match_score * 100 | number : 0}}%">
@@ -328,8 +316,14 @@
         </div>
         </div>
 
+        <p class="help-msg " id="help3">
+        This is just one implementation case of our API.<br/>
+        There are many more examples e.g. recommendations inside emails, at the checkout as an upsell, through a discovery box etc.
+        <br/>
+        <br/>
+        We'd love to talk to you about how best to implement in your business. Simply email <a style="color:#8ac651;" href="mailto:help@dishq.in?Subject=Request%20for%20demo">help@dishq.in </a>
+        </p>
       </div>
-
     </div>
 </div>
 </div>
@@ -361,6 +355,7 @@
           $("#dislike_sec").hide();
           $("#personalise_button").hide();
           $("#detail_card").hide();
+          $("#dislike_section").hide();
           var iframe = $("#frame_1");
           var iframe_new = $("#frame_2");
          //demo prepare
@@ -395,7 +390,6 @@
                  }
 
                  if(isJSON(e.data)){
-
                    var pass_data = JSON.parse(e.data);
                    if(pass_data.hasOwnProperty('restaurant')){
                      $scope.card_data(parseInt(pass_data.restaurant),parseInt(pass_data.dish));
@@ -405,7 +399,6 @@
                  }else{
                    console.log('no')
                  }
-
                },false);
 
           });
@@ -423,24 +416,26 @@
 
 
           $scope.demo_start = function(){
-            $(".box-1").fadeIn();
+            $(".box-2").fadeIn();
             setTimeout(function() {
-              $('#next1').fadeIn();
-            }, 2000);
+              $('#next2').fadeIn();
+            }, 1000);
           }
 
           $scope.step2 = function(){
             var iframeWin = document.getElementById("frame_1").contentWindow;
             iframeWin.postMessage('step2', url);
-            $(".box-1").fadeOut();
-            $(".box-2").fadeIn();
-            $("#next2").fadeIn();
+            $(".box-2").fadeOut();
+            $(".box-1").fadeIn();
+              setTimeout(function() {
+            $("#next1").fadeIn();
+          }, 2000);
           }
 
             $scope.step3 = function(){
               var iframeWin = document.getElementById("frame_1").contentWindow;
               iframeWin.postMessage('step3', url);
-              $(".box-2").fadeOut();
+              $(".box-1").fadeOut();
               //Show the help box on each side for the user
               $("#help2").fadeIn();
               $("#help1").fadeIn();
@@ -476,14 +471,23 @@
 
             }
             $scope.step6 = function(){
-              location.reload();
+              $('#p-right').fadeOut();
+              $('#detail_card').fadeIn();
+              setTimeout(function() {
+                $('#help3').fadeIn();
+              }, 3000);
             }
 
             $scope.get_dislike = function(){
               $('#like_sec').fadeOut();
+
               setTimeout(function() {
+                $('#dislike_section').fadeIn();
                 $('#dislike_sec').fadeIn();
               }, 1000);
+              if($scope.dislikes.length != 0){
+                $('personalise_button').fadeIn();
+              }
             }
             $scope.stal = function(){
               $("#sec3").fadeOut();
@@ -503,6 +507,50 @@
             $scope.dislikes = [];
             $scope.dishes = [];
             $scope.isOpen = true;
+            $scope.fav_done = false;
+            $scope.dislike_done = false;
+
+            $scope.get_user_profile = function(){
+              var url = "api/food_profile.php?slug="+$scope.slug+'/';
+
+              $http.get(url).then(function successCallback(response){
+
+                  var new_data = response.data;
+                  if(response.status == 200){
+
+                    if(new_data.data.hasOwnProperty('favourite')){
+                      $scope.fav = new_data.data.favourite;
+
+                      angular.forEach($scope.fav, function(value, key) {
+                        value.generic_dish_id = value.id;
+                        value.dish_name = value.name;
+                        delete value.id;
+                        delete value.name;
+
+                      })
+                      $scope.dislikes = new_data.data.dislike;
+                      angular.forEach($scope.dislikes, function(value, key) {
+                        value.generic_dish_id = value.id;
+                        value.dish_name = value.name;
+                        delete value.id;
+                        delete value.name;
+
+                      })
+                      $("#dislike_button").fadeIn();
+                      $("#personalise_button").fadeIn();
+                      $scope.check();
+                    }
+                  }else{
+
+                  }
+              }, function errorCallback(response) {
+
+              });
+
+             }
+            $scope.get_user_profile();
+
+
             // $scope.isHideBrand = true;
             var id = 0;
             $scope.searchDishes = function(h){
@@ -563,6 +611,7 @@
               }
               if($scope.fav.length >= 6){
                 $("#dislike_button").fadeIn();
+                $scope.get_dislike();
               }
               clear();
               $scope.hideDropdown();
@@ -623,22 +672,25 @@
                $scope.dislikeCount = 1 - $scope.dislikes.length;
 
                if ($scope.fav.length >= 6){
-                 $scope.fav_text = 'You are free to select more';
+                 $scope.fav_text = 'You can replace the dish by removing from the list to your left ';
                  $scope.favCount = '';
+                  $scope.fav_done = true;
                }else{
                  $scope.fav_text = 'more to go';
+                 $scope.fav_done = false;
                }
                if ($scope.dislikes.length >= 1){
-                 $scope.dislike_text = 'You are free to select more';
+                 $scope.dislike_text = 'You can replace the dish by removing from the list to your right';
                  $scope.dislikeCount = '';
+                 $scope.dislike_done = true;
                }else{
                  $scope.dislike_text = 'Need atleast';
+                  $scope.dislike_done = false;
                }
 
 
 
              }
-
 
              $scope.hideDropdown = function(){
                $timeout(function() {
@@ -722,10 +774,9 @@
                        }
                        if(new_data.data[1].menu.length > 0){
                          $scope.rest2 = new_data.data[1].menu;
-
                        }
 
-
+                       $scope.selected_card = $scope.rest1[0]
                      }
                    }else{
 
@@ -736,6 +787,8 @@
 
              }
 
+
+             $scope.check();
 
 
 

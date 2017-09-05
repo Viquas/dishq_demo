@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<title>Dishq</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/teal.css">
+<body style="" ng-app="main" ng-controller="restaurantController">
+<header class="home-header">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-xs-12">
+        <!-- <img class="img-responsive" src="images/restaurant.png"> -->
+        <h5 class="r-name" data-toggle="popover" data-placement="bottom" popover> {{rest_name}} <i class="fa fa-icon fa-angle-down"></i> </h5>
+        <ul id="popover-content" class="list-group" style="display: none">
+          <a ng-click="change_restaurant(0);" class="list-group-item"> Indian Restaurant </a>
+          <a  class="list-group-item" ng-click="change_restaurant(1);">Italian Restaurant</a>
+        </ul>
+      </div>
+      <!-- <div class="col-xs-2">
+        <img  class="im pull-right">
+      </div> -->
+    </div>
+
+  </div>
+  <ul class="nav nav-tabs">
+
+    <li ng-repeat="(key, value) in restaurant" ng-class="{active: $index == selected }" ng-click="tab_select($index,$event);" id="#d{{$index}}">
+      <a data-target="#{{key}}">{{key}}</a>
+    </li>
+
+  </ul>
+</header>
+<div class="container-full f-top-home">
+
+
+<div class="tab-content">
+  <div id="{{key}}"  class="tab-pane fade in " ng-class="{active: $index == selected }"  ng-repeat="(key, value) in restaurant">
+    <div class="dish-card" ng-repeat="card in value">
+
+      <div class="row">
+        <div class="col-xs-1">
+          <img class="v-img" src="images/veg.png">
+        </div>
+        <div class="col-xs-10">
+          <p class="dish-name">{{card.name}} <br/><span class="tag" ng-repeat="t in card.tag">{{t}} </span></p>
+        </div>
+        <!-- <div class="col-xs-3">
+          <p class="text-center score">234<br/><span class="s-text">Match Score</span></p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div id="home" class="tab-pane fade in active">
+    <div class="dish-card">
+      <div class="row">
+        <div class="col-xs-1">
+          <img class="v-img" src="images/veg.png">
+        </div>
+        <div class="col-xs-8">
+          <p class="dish-name">Dish name  is something</p>
+        </div>
+        <div class="col-xs-3">
+          <p class="text-center score">234<br/><span class="s-text">Match Score</span></p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script>
+       var app = angular.module('main', []);
+       app.directive('popover', function($compile){
+         return {
+           restrict : 'A',
+           link : function(scope, elem){
+
+            var content = $("#popover-content").html();
+            var compileContent = $compile(content)(scope);
+            var title = $("#popover-head").html();
+            var options = {
+                content: compileContent,
+                html: true,
+                title: title
+              };
+
+              $(elem).popover(options);
+            }
+          }
+        });
+         app.controller('restaurantController', function($scope, $http, $timeout,$document ) {
+           $scope.rest_name = 'Indian Restaurant';
+           $scope.restaurant = [];
+           $scope.slug=getParameterByName('slug', '');
+           $scope.indian = [];
+           $scope.international = [];
+            $scope.selected = 0;
+            var web_url = "http://dishq.in/demo.php?slug="+$scope.slug;
+            // var web_url = "http://localhost/dishq/demo.php?slug="+$scope.slug;
+           $scope.searchMenu = function(){
+              var url = "api/get_restaurant.php";
+            $http({
+                method: 'get',
+                url: url
+            }).
+             success(function(status) {
+                var data = status.data;
+                $scope.indian = data[0].menu;
+                $scope.international = data[1].menu;
+                $scope.restaurant = $scope.indian;
+  	            // Send the message true to the parent window
+                setTimeout(function() {
+  	            parent.postMessage(true,web_url);
+                $scope.step2();
+
+                }, 2000);
+            }).
+            error(function(status) {
+            // console.log(status);
+            });
+          }
+
+          $scope.searchMenu();
+          $scope.tab_select = function(index,$event){
+            $scope.selected = index;
+
+            var e = angular.element($event.target);
+            var myEl = $document.find('#d4'+index).prop('offsetLeft');
+            scrollTo = 150*(index);
+            console.log(angular.element($event.target).prop('offsetLeft'));
+            console.log(scrollTo+''+index);
+            $('ul.nav-tabs').animate({'scrollLeft': scrollTo}, 500);
+          }
+          $scope.change_restaurant = function(i){
+
+            if(i==0){
+                $scope.rest_name = 'Indian Restaurant';
+                $scope.restaurant = $scope.indian;
+            }else{
+              $scope.rest_name = 'Italian Restaurant';
+                $scope.restaurant = $scope.international;
+            }
+
+            $("[data-toggle='popover']").popover('hide');
+          }
+
+
+          //Demo Animations
+          $scope.start_demo=function(){
+            $("[data-toggle='popover']").popover('hide');
+            $('ul.nav-tabs').animate({'scrollLeft': 1000}, 1100);
+              setTimeout(function() {
+                $('ul.nav-tabs').animate({'scrollLeft': 0}, 1000);
+              }, 1100);
+          }
+
+          $scope.step2 = function(){
+            $("[data-toggle='popover']").popover('show');
+
+          }
+          $scope.step3 = function(){
+            $("[data-toggle='popover']").popover('hide');
+          }
+
+            var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+               var eventer = window[eventMethod];
+               var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+               // Listen to message from child window
+               eventer(messageEvent,function(e) {
+                 if(e.data == 'step2'){
+                   $scope.start_demo();
+                 }else if(e.data == 'step3'){
+                   $scope.step3();
+                 }
+               },false);
+
+          function getParameterByName(name) {
+            url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return '';
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+         });
+
+
+
+ </script>
+ <script>
+
+
+$(function () {
+  $('.tab-content:not(:first)').hide();
+   $('#tabs-nav a').bind('click', function (e) {
+    e.preventDefault();
+    $this = $(this);
+    $target = $(this.hash);
+    $('#tabs-nav a.current').removeClass('current');
+    $('.tab-content:visible').fadeOut("slow", function () {
+        $this.addClass('current');
+        $target.fadeIn("slow");
+    });
+  }).filter(':first').click();
+});
+
+$(function() {
+  $('[data-toggle="popover"]').popover({
+		html: true,
+    content: function() {
+      return $('#popover-content').html();
+    }
+  });
+})
+
+</script>
+
+</body>

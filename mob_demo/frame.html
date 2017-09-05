@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<title>Dishq</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/teal.css">
+<body style="" ng-app="main" ng-controller="restaurantController">
+<header>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-2">
+        <img src="images/ham.png" class="im">
+      </div>
+      <div class="col-xs-8">
+        <!-- <img class="img-responsive" src="images/restaurant.png"> -->
+        <h4 class="r-name"> Indian Restaurant </h4>
+      </div>
+      <div class="col-xs-2">
+        <img src="images/filter.png" class="im pull-right">
+      </div>
+    </div>
+
+  </div>
+
+</header>
+<div class="container-fluid f-top" >
+    <div class="dish-card" ng-repeat="card in restaurant">
+      <div class="row">
+        <div class="col-xs-1">
+          <img class="v-img" ng-if="card.dish_nature == 1 || card.dish_nature == 4" src="images/veg.png">
+          <img class="v-img" ng-if="card.dish_nature == 3" src="images/non-veg.png">
+          <img class="v-img" ng-if="card.dish_nature == 2" src="images/egg.png">
+
+        </div>
+        <div class="col-xs-8">
+          <p class="dish-name">{{card.name}}<br/> <span class="tag" ng-repeat="t in card.tag">{{t}} </span></p>
+        </div>
+        <div class="col-xs-3">
+          <p class="text-center score">{{card.match_score.aggregated_score | number : 0}}<br/><span class="s-text">Match Score</span></p>
+        </div>
+      </div>
+    </div>
+
+  <!-- <div id="home" class="tab-pane fade in active">
+    <div class="dish-card">
+      <div class="row">
+        <div class="col-xs-1">
+          <img class="v-img" src="images/veg.png">
+        </div>
+        <div class="col-xs-8">
+          <p class="dish-name">Dish name  is something</p>
+        </div>
+        <div class="col-xs-3">
+          <p class="text-center score">234<br/><span class="s-text">Match Score</span></p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script>
+       var app = angular.module('main', []);
+
+         app.controller('restaurantController', function($scope, $http, $timeout ) {
+           $scope.restaurant = [];
+            $scope.selected = 0;
+            $scope.slug=getParameterByName('slug', '');
+
+           $scope.searchMenu = function(){
+              var url = "api/recommendations.php?slug="+$scope.slug;
+              console.log(url);
+            $http({
+                method: 'get',
+                url: url
+            }).
+             success(function(status) {
+                var data = status.data;
+                $scope.restaurant = data[0].menu;
+                $scope.international = data[1].menu;
+                console.log($scope.restaurant);
+            }).
+            error(function(status) {
+            // console.log(status);
+            });
+          }
+          $scope.searchMenu();
+          $scope.tab_select = function(index){
+            $scope.selected = index;
+          }
+
+          function getParameterByName(name) {
+            url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return '';
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+         });
+
+ </script>
+ <script>
+$(document).ready(function(){
+    $(".nav-tabs a").click(function(){
+        $(this).tab('show');
+    });
+    $('.nav-tabs a').on('shown.bs.tab', function(event){
+        var x = $(event.target).text();         // active tab
+        var y = $(event.relatedTarget).text();  // previous tab
+        $(".act span").text(x);
+        $(".prev span").text(y);
+    });
+});
+</script>
+
+</body>

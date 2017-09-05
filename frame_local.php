@@ -39,7 +39,7 @@
             <p class="message-box ">
               Scroll the menu type to select the dish types.<br/><br/>
             </p>
-              <span class="next " ng-click="step2();" id="next1">Next </span>
+              <span class="next " ng-click="step3();" id="next1">Next </span>
           </div>
           </div>
 
@@ -59,6 +59,8 @@
             <p class="text-center" >
               <span class="help-msg" id="p_text">
                 If you are done playing around<br/>
+                <br/>
+                <br/>
               </span>
               <a href="" class="btn g-button hide_now" ng-click="step4();"  id="p_button"> Let's personalise </a>
             </p>
@@ -81,7 +83,7 @@
           You may change restaurant menu from
           (Indian/International) from this tab
         </p>
-        <span class="next" ng-click="step3();" id="next2"> Next </span>
+        <span class="next" ng-click="step2();" id="next2"> Next </span>
         </div>
         </div>
 
@@ -109,7 +111,7 @@
     <div class="row row-fluid">
       <div class="col-lg-3 like-section" id="like_section">
         <div class="marg-section">
-        <h2 class="text-center"> You like</h2>
+        <h2 class="text-center"> Your like</h2>
           <div class="l-box" ng-repeat="f in fav">
             <div class="row center">
               <div class="col-sm-2">
@@ -133,30 +135,23 @@
 
       </div>
 
-      <div class="col-lg-6   text-center" id="input_section">
+      <div class="col-lg-6   text-center" id="input_section" >
         <div class="" id="like_sec" >
-          <h3 class="big"> Enter 6 dishes you like.</h3>
-          <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search" ng-change="searchDishes(0)"  ></input>
+          <h2 class="big"> Enter 6 dishes you like.</h2>
+          <h4 class="mid-text text-center"> <span class='count'> {{favCount}}</span> {{fav_text}}</h5>
+          <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search" ng-change="searchDishes(0)"  ng-disabled="fav_done"></input>
 
           <span class="tt-dropdown-menu"  ng-show="showResult">
 
                   <div class="tt-dataset-2" style="display: block;">
                     <span class="tt-suggestions" >
                       <div class="tt-suggestion"  ng-repeat="x in dishes| limitTo:7" ng-class="{'tt-is-under-cursor': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-click="favsAdd(x)">
-                        <!-- <p class="tt-results" ng-cloak>{{x.dish_name}}
-                          <span class="full-right s-result"  ng-if="x.dish_nature == 1 || x.dish_nature == 4 "> <img class="veg-img" style="" src="images/veg.png">
-                          </span>
-                          <span class="full-right s-result"  ng-if="x.dish_nature == 2"> <img  class="veg-img" src="images/egg.png">
-                          </span>
-                          <span class="full-right s-result"  ng-if="x.dish_nature == 3"> <img  class="veg-img" src="images/non-veg.png">
-                          </span>
-                          <span ng-repeat="t in x.tag" class="tt-tag"> {{t}} </span>
-                        </p> -->
+
                         <div class="row center">
                           <div class="col-sm-1">
                             <img class="img-responsive" ng-if="x.dish_nature == 1 || x.dish_nature == 4 " src="images/veg.png">
-                            <img class="img-responsive" ng-if="x.dish_nature == 2 " src="images/non-veg.png">
-                            <img class="img-responsive" ng-if="x.dish_nature == 3 " src="images/egg.png">
+                            <img class="img-responsive" ng-if="x.dish_nature == 3 " src="images/non-veg.png">
+                            <img class="img-responsive" ng-if="x.dish_nature == 2 " src="images/egg.png">
                           </div>
                           <div class="col-sm-10">
                             <p class="l-search">{{x.dish_name}}</p>
@@ -173,16 +168,17 @@
 
           <div class="" id="dislike_sec">
             <h3 class="big"> Enter dishes you dislike.</h3>
-            <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search_d  " ng-change="searchDishes(1)"  ></input>
-            <span class="tt-dropdown-menu"  ng-show="showResult">
+            <h4 class="mid-text text-center"> <span class='count'> {{dislikeCount}}</span> {{dislike_text}}</h5>
+            <input class="search-box" placeholder="Example: Butter Chicken, Pasta" autocomplete="off" ng-model="search_d" ng-change="searchDishes(1)"  ng-disabled="dislike_done"></input>
+            <span class="tt-dropdown-menu"  ng-show="showResult_d">
                     <div class="tt-dataset-2" style="display: block;">
                       <span class="tt-suggestions" >
                         <div class="tt-suggestion"  ng-repeat="y in dishes| limitTo:7" ng-class="{'tt-is-under-cursor': hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-click="dislikeAdd(y)">
                           <div class="row center">
                             <div class="col-sm-1">
                               <img class="img-responsive" ng-if="y.dish_nature == 1 || y.dish_nature == 4 " src="images/veg.png">
-                              <img class="img-responsive" ng-if="y.dish_nature == 2 " src="images/non-veg.png">
-                              <img class="img-responsive" ng-if="y.dish_nature == 3 " src="images/egg.png">
+                              <img class="img-responsive" ng-if="y.dish_nature == 3 " src="images/non-veg.png">
+                              <img class="img-responsive" ng-if="y.dish_nature == 2 " src="images/egg.png">
                             </div>
                             <div class="col-sm-10">
                               <p class="l-search">{{y.dish_name}}</p>
@@ -200,7 +196,6 @@
          <div class="col-lg-3 dislike-section" id="dislike_section">
            <div class="marg-section">
            <h2 class="text-center"> Your Dislike</h2>
-
              <div class="l-box" ng-repeat="d in dislikes">
                <div class="row center">
                  <div class="col-sm-2">
@@ -291,7 +286,7 @@
                  </td>
                 </tr>
                 <tr>
-                  <td class="first" width="40%"><p class="match">cooking style   </td>
+                  <td class="first" width="40%"><p class="match">Cooking style   </td>
                   <td class="second"><div class="progress">
                     <div class="progress-bar green-bar" role="progressbar" aria-valuenow="70"
                     aria-valuemin="0" aria-valuemax="100" style="width:{{selected_card.match_score.ingredient_cooking_style_match_score * 100 | number : 0}}%">
@@ -300,7 +295,7 @@
                  </td>
                 </tr>
                 <tr>
-                  <td class="first" width="40%"><p class="match">Ingredient Matchscore </td>
+                  <td class="first" width="40%"><p class="match">Ingredient Match Score </td>
                   <td class="second"><div class="progress">
                     <div class="progress-bar green-bar" role="progressbar" aria-valuenow="70"
                     aria-valuemin="0" aria-valuemax="100" style="width:{{selected_card.match_score.ingredient_match_score * 100 | number : 0}}%">
@@ -364,14 +359,25 @@
         var url_stall = "http://localhost/mob_demo/stal.html";
         var url_personalise = "http://localhost/mob_demo/personalise.html?slug="+$scope.slug;
           $("#footer").hide();
-          // $("#dislike_button").hide();
+          $("#dislike_button").hide();
           $("#dislike_sec").hide();
           $("#personalise_button").hide();
           $("#detail_card").hide();
+          $("#dislike_section").hide();
           var iframe = $("#frame_1");
           var iframe_new = $("#frame_2");
          //demo prepare
-         $(function(){
+
+         function isJSON(text){
+           try{
+             JSON.parse(text);
+             return true;
+           }
+             catch (error){
+               return false;
+             }
+           }
+          $(function(){
                // Create IE + others compatible event handler
                var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
                var eventer = window[eventMethod];
@@ -379,9 +385,10 @@
 
                // Listen to message from child window
                eventer(messageEvent,function(e) {
-                 console.log(e.data);
+
 
                  if(e.data == true){
+
                    $scope.demo_start();
                  }else if(e.data == 'personilse_start'){
                    $("#p-left").fadeIn();
@@ -390,14 +397,20 @@
                    }, 2000);
                  }
 
-                 if(isJson(e.data)){
-                   console.log('yes');
+                 if(isJSON(e.data)){
                    var pass_data = JSON.parse(e.data);
-                  $scope.card_data(parseInt(pass_data.restaurant),parseInt(pass_data.dish));
+                   if(pass_data.hasOwnProperty('restaurant')){
+                     $scope.card_data(parseInt(pass_data.restaurant),parseInt(pass_data.dish));
+                    $('#detail_card').fadeIn();
+                    console.log('yes')
+                    }
+                 }else{
+                   console.log('no')
                  }
                },false);
 
           });
+
 
           $scope.start = function(){
           $('body,html').animate({'scrollTop': 100}, 1000);
@@ -411,24 +424,26 @@
 
 
           $scope.demo_start = function(){
-            $(".box-1").fadeIn();
+            $(".box-2").fadeIn();
             setTimeout(function() {
-              $('#next1').fadeIn();
-            }, 2000);
+              $('#next2').fadeIn();
+            }, 1000);
           }
 
           $scope.step2 = function(){
             var iframeWin = document.getElementById("frame_1").contentWindow;
             iframeWin.postMessage('step2', url);
-            $(".box-1").fadeOut();
-            $(".box-2").fadeIn();
-            $("#next2").fadeIn();
+            $(".box-2").fadeOut();
+            $(".box-1").fadeIn();
+              setTimeout(function() {
+            $("#next1").fadeIn();
+          }, 2000);
           }
 
             $scope.step3 = function(){
               var iframeWin = document.getElementById("frame_1").contentWindow;
               iframeWin.postMessage('step3', url);
-              $(".box-2").fadeOut();
+              $(".box-1").fadeOut();
               //Show the help box on each side for the user
               $("#help2").fadeIn();
               $("#help1").fadeIn();
@@ -463,13 +478,21 @@
               }, 3000);
 
             }
-
+            $scope.step6 = function(){
+              $('#p-right').fadeOut();
+              $('#detail_card').fadeIn();
+            }
 
             $scope.get_dislike = function(){
               $('#like_sec').fadeOut();
+
               setTimeout(function() {
+                $('#dislike_section').fadeIn();
                 $('#dislike_sec').fadeIn();
               }, 1000);
+              if($scope.dislikes.length != 0){
+                $('personalise_button').fadeIn();
+              }
             }
             $scope.stal = function(){
               $("#sec3").fadeOut();
@@ -483,13 +506,56 @@
             $scope.selected_card = [];
             $scope.dishes = [];
             $scope.showResult = true;
-            $scope.fav = [{"dish_nature":2,"dish_name":"Apple Cider Pancakes With Apple Syrup","tag":["Pancake"],"generic_dish_id":23804},{"dish_nature":1,"dish_name":"Applesauce","tag":["Condiment/Spread"],"generic_dish_id":29101},{"generic_dish_id":16370,"tag":["European"],"dish_name":"Spicy Spinach","dish_nature":1}
-            ,{"dish_nature":1,"dish_name":"Chocolate Chip Cheesecake","tag":["Dessert"],"generic_dish_id":25954},{"generic_dish_id":2072,"tag":["Italian"],"dish_name":"Butternut Squash Cappellacci with Sage Brown Butter","dish_nature":1},{"generic_dish_id":3364,"tag":["Mangalorean"],"dish_name":"Chilly Chicken","dish_nature":3}];
+            $scope.fav = [];
             $scope.favCount = 6;
             $scope.dislikeCount = 1;
             $scope.dislikes = [];
             $scope.dishes = [];
             $scope.isOpen = true;
+            $scope.fav_done = false;
+            $scope.dislike_done = false;
+
+            $scope.get_user_profile = function(){
+              var url = "api/food_profile.php?slug="+$scope.slug+'/';
+
+              $http.get(url).then(function successCallback(response){
+
+                  var new_data = response.data;
+                  if(response.status == 200){
+
+                    if(new_data.data.hasOwnProperty('favourite')){
+                      $scope.fav = new_data.data.favourite;
+
+                      angular.forEach($scope.fav, function(value, key) {
+                        value.generic_dish_id = value.id;
+                        value.dish_name = value.name;
+                        delete value.id;
+                        delete value.name;
+
+                      })
+                      $scope.dislikes = new_data.data.dislike;
+                      angular.forEach($scope.dislikes, function(value, key) {
+                        value.generic_dish_id = value.id;
+                        value.dish_name = value.name;
+                        delete value.id;
+                        delete value.name;
+
+                      })
+                      $("#dislike_button").fadeIn();
+                      $("#personalise_button").fadeIn();
+                      $scope.check();
+                    }
+                  }else{
+
+                  }
+              }, function errorCallback(response) {
+
+              });
+
+             }
+            $scope.get_user_profile();
+
+
             // $scope.isHideBrand = true;
             var id = 0;
             $scope.searchDishes = function(h){
@@ -507,17 +573,15 @@
                  if(new_data.data.length > 0){
                   $scope.dishes = new_data.data;
 
-               }else if(new_data.data.length == 0){
-
+                }else if(new_data.data.length == 0){
                   $scope.dishes = [{generic_dish_id: 0, dish_name: "No results found"}];
-               }
+                }
 
                if(id == 0){
                   if(h == 0){
                     setTimeout(suggest($scope.dishes), 10 );
                   }else{
                     setTimeout(suggest_d($scope.dishes), 10 );
-
                   }
                  }
 
@@ -552,12 +616,13 @@
               }
               if($scope.fav.length >= 6){
                 $("#dislike_button").fadeIn();
+                $scope.get_dislike();
               }
               clear();
               $scope.hideDropdown();
             }
             $scope.dislikeAdd = function(data){
-              console.log('called');
+
 
               var newEntry = 0;
               for (var i = 0; i < $scope.dislikes.length; i++) {
@@ -612,22 +677,25 @@
                $scope.dislikeCount = 1 - $scope.dislikes.length;
 
                if ($scope.fav.length >= 6){
-                 $scope.fav_text = 'You are free to select more';
+                 $scope.fav_text = 'You can replace the dish by removing from the list to your left ';
                  $scope.favCount = '';
+                  $scope.fav_done = true;
                }else{
                  $scope.fav_text = 'more to go';
+                 $scope.fav_done = false;
                }
                if ($scope.dislikes.length >= 1){
-                 $scope.dislike_text = 'You are free to select more';
+                 $scope.dislike_text = 'You can replace the dish by removing from the list to your right';
                  $scope.dislikeCount = '';
+                 $scope.dislike_done = true;
                }else{
                  $scope.dislike_text = 'Need atleast';
+                  $scope.dislike_done = false;
                }
 
 
 
              }
-
 
              $scope.hideDropdown = function(){
                $timeout(function() {
@@ -686,7 +754,7 @@
                   $scope.selected_card = $scope.rest2[dish_no];
                }
                $scope.$apply();
-               console.log($scope.selected_card);
+
              }
 
              $scope.get_recommendations = function(){
@@ -711,31 +779,23 @@
                        }
                        if(new_data.data[1].menu.length > 0){
                          $scope.rest2 = new_data.data[1].menu;
-
                        }
 
-                       console.log($scope.rest1);
-                       console.log($scope.rest2);
+                       $scope.selected_card = $scope.rest1[0]
                      }
                    }else{
 
                    }
                }, function errorCallback(response) {
-                   console.log(response);
+
                });
 
              }
 
 
-             function isJSON(text){
-               try{
-                 JSON.parse(text);
-                 return true;
-               }
-                 catch (error){
-                   return false;
-                 }
-               }
+             $scope.check();
+
+
 
           function getParameterByName(name) {
             url = window.location.href;

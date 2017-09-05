@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<title>Dishq</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/teal.css">
+<body style="" ng-app="main" ng-controller="restaurantController">
+<header class="home-header">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-xs-2">
+        <img src="images/ham.png" class="im">
+      </div> -->
+      <div class="col-xs-12">
+        <!-- <img class="img-responsive" src="images/restaurant.png"> -->
+        <h5 class="r-name" data-toggle="popover" data-placement="bottom" popover> {{rest_name}} <i class="fa fa-icon fa-angle-down"></i> </h5>
+        <ul id="popover-content" class="list-group" style="display: none">
+          <a ng-click="change_restaurant(0);" class="list-group-item"> Indian Restaurant </a>
+          <a  class="list-group-item" ng-click="change_restaurant(1);">Italian Restaurant</a>
+        </ul>
+      </div>
+      <!-- <div class="col-xs-2">
+        <img src="images/filter.png" class="im pull-right">
+      </div> -->
+    </div>
+
+  </div>
+  <ul class="nav nav-tabs">
+    <li ng-class="{active: selected == 10 }" ng-click="tab_select(10,$event);" >
+        <a data-target="#personalise" class="animated pulse"><span>Personalised Menu<span></a>
+    </li>
+    <li ng-repeat="(key, value) in restaurant" ng-class="{active: $index == selected }" ng-click="tab_select($index,$event);">
+      <a data-target="#{{key}}">{{key}}</a>
+    </li>
+
+  </ul>
+</header>
+<div class="container-full f-top-home">
+
+
+<div class="tab-content">
+  <div id="personalise"  class="tab-pane fade in " ng-class="{active: selected == 10 }">
+    <div class="dish-card" ng-repeat="c in personilsed_menu" ng-click="sel($index);">
+      <div class="row">
+        <div class="col-xs-1">
+          <img class="v-img" ng-if="c.dish_nature == 1 || c.dish_nature == 4" src="images/veg.png">
+          <img class="v-img" ng-if="c.dish_nature == 3" src="images/non-veg.png">
+          <img class="v-img" ng-if="c.dish_nature == 2" src="images/egg.png">
+        </div>
+        <div class="col-xs-10">
+          <p class="dish-name">{{c.name}}<br/> <span class="tag" ng-repeat="t in c.tag">{{t}} </span></p>
+        </div>
+        <!-- <div class="col-xs-3">
+          <p class="text-center score">234<br/><span class="s-text">Match Score</span></p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div id="{{key}}"  class="tab-pane fade in " ng-class="{active: $index == selected }"  ng-repeat="(key, value) in restaurant" >
+    <div class="dish-card" ng-repeat="card in value">
+
+      <div class="row">
+        <div class="col-xs-1">
+
+          <img class="v-img" ng-if="card.dish_nature == 1 || card.dish_nature == 4" src="images/veg.png">
+          <img class="v-img" ng-if="card.dish_nature == 3" src="images/non-veg.png">
+          <img class="v-img" ng-if="card.dish_nature == 2" src="images/egg.png">
+        </div>
+        <div class="col-xs-10">
+          <p class="dish-name">{{card.name}}<br/> <span class="tag" ng-repeat="t in card.tag">{{t}} </span></p>
+        </div>
+        <!-- <div class="col-xs-3">
+          <p class="text-center score">234<br/><span class="s-text">Match Score</span></p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script>
+       var app = angular.module('main', []);
+
+       app.directive('popover', function($compile){
+         return {
+           restrict : 'A',
+           link : function(scope, elem){
+
+            var content = $("#popover-content").html();
+            var compileContent = $compile(content)(scope);
+            var title = $("#popover-head").html();
+            var options = {
+                content: compileContent,
+                html: true,
+                title: title
+              };
+
+              $(elem).popover(options);
+            }
+          }
+        });
+         app.controller('restaurantController', function($scope, $http, $timeout,$document ) {
+           $scope.rest_name = 'Indian Restaurant';
+           $scope.restaurant = [];
+           $scope.indian = [];
+           $scope.international = [];
+           $scope.personilsed_menu = [];
+           $scope.personilsed_indian = [];
+           $scope.personilsed_international = [];
+
+            $scope.res_selected = 0;
+            $scope.selected = 10;
+            $scope.slug=getParameterByName('slug', '');
+            var web_url = "http://dishq.in/demo.php?slug="+$scope.slug;
+            // var web_url = "http://localhost/dishq/demo.php?slug="+$scope.slug;
+            $scope.getPersonilised = function(){
+              var url = "api/recommendations.php?slug="+$scope.slug;
+            $http({
+                method: 'get',
+                url: url
+            }).
+             success(function(status) {
+                var data = status.data;
+                $scope.personilsed_indian = data[0].menu;
+                $scope.personilsed_international = data[1].menu;
+                $scope.personilsed_menu = $scope.personilsed_indian;
+                //Sending message to parent dom
+                 parent.postMessage('personilse_start',web_url);
+
+
+            }).
+            error(function(status) {
+            // console.log(status);
+            });
+           }
+
+
+
+           $scope.searchMenu = function(){
+              var url = "api/get_restaurant.php";
+            $http({
+                method: 'get',
+                url: url
+            }).
+             success(function(status) {
+                var data = status.data;
+                $scope.indian = data[0].menu;
+                $scope.international = data[1].menu;
+                $scope.restaurant = $scope.indian;
+
+
+
+            }).
+            error(function(status) {
+            // console.log(status);
+            });
+          }
+          $scope.searchMenu();
+          $scope.getPersonilised();
+          $scope.change_restaurant = function(i){
+            if(i==0){
+                $scope.res_selected = 0;
+                $scope.rest_name = 'Indian Restaurant';
+                $scope.restaurant = $scope.indian;
+                $scope.personilsed_menu = $scope.personilsed_indian;
+            }else{
+                $scope.res_selected = 1;
+                $scope.rest_name = 'Italian Restaurant';
+                $scope.restaurant = $scope.international;
+                $scope.personilsed_menu = $scope.personilsed_international;
+            }
+            $("[data-toggle='popover']").popover('hide');
+          }
+
+          $scope.tab_select = function(index,$event){
+            $scope.selected = index;
+            var e = angular.element($event.target);
+            var myEl = $document.find('#d4'+index).prop('offsetLeft');
+            if(index == 10){
+              scrollTo = 0;
+            }else{
+              scrollTo = 150*(index+1);
+            }
+            $('ul.nav-tabs').animate({'scrollLeft': scrollTo}, 500);
+          }
+          setTimeout(function() {
+          $("[data-toggle='popover']").popover('show');
+        }, 10000);
+          $scope.sel = function($index){
+            //send message to parent about the clicked card
+              var pass_data = {
+                'dish':$index,
+                'restaurant':$scope.res_selected,
+              };
+            parent.postMessage(JSON.stringify(pass_data),web_url);
+          }
+          function getParameterByName(name) {
+            url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+              if (!results) return null;
+              if (!results[2]) return '';
+              return decodeURIComponent(results[2].replace(/\+/g, " "));
+            }
+         });
+ </script>
+ <script>
+
+
+$(function () {
+  $('.tab-content:not(:first)').hide();
+   $('#tabs-nav a').bind('click', function (e) {
+    e.preventDefault();
+    $this = $(this);
+    $target = $(this.hash);
+    $('#tabs-nav a.current').removeClass('current');
+    $('.tab-content:visible').fadeOut("slow", function () {
+        $this.addClass('current');
+        $target.fadeIn("slow");
+    });
+  }).filter(':first').click();
+});
+
+$(function() {
+  $('[data-toggle="popover"]').popover({
+		html: true,
+    content: function() {
+      return $('#popover-content').html();
+    }
+  });
+})
+</script>
+
+
+</body>

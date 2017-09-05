@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<title>Dishq</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/teal.css">
+<body style="" ng-app="main" ng-controller="loadController">
+
+
+<section>
+  <div class="row">
+    <div class="container">
+      <div class="col-xs-10 col-xs-offset-1">
+          <img class="img-responsive" src="http://dishq.in/images/logogreen.png">
+          <img class="img-responsive loader" src="http://dishq.in/images/load.gif">
+        <h3 class="text-center b-card" id="c1" > Creating your food profile</h3>
+        <h3 class="text-center b-card" id="c2"> looking for dishes you like</h3>
+        <h3 class="text-center b-card" id="c3"> One more text to stall</h3>
+        <h3 class="text-center b-card" id="c4"> One more just in case</h3>
+        </div>
+       </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script>
+       var app = angular.module('main', []);
+        app.controller('loadController', function($scope, $http, $timeout ) {
+          $scope.start = function(){
+            setTimeout(function() {
+              $('#c1').fadeIn();
+            }, 2000);
+            setTimeout(function() {
+              $('#c2').fadeIn();
+            }, 8000);
+            setTimeout(function() {
+              $('#c3').fadeIn();
+            }, 16000);
+            setTimeout(function() {
+              $('#c4').fadeIn();
+            }, 20000);
+          }
+          $scope.start();
+
+        });
+  </script>
+ <script>
+
+
+$(function () {
+  $('.tab-content:not(:first)').hide();
+   $('#tabs-nav a').bind('click', function (e) {
+    e.preventDefault();
+    $this = $(this);
+    $target = $(this.hash);
+    $('#tabs-nav a.current').removeClass('current');
+    $('.tab-content:visible').fadeOut("slow", function () {
+        $this.addClass('current');
+        $target.fadeIn("slow");
+    });
+  }).filter(':first').click();
+});
+
+$(function() {
+  $('[data-toggle="popover"]').popover({
+		html: true,
+    content: function() {
+      return $('#popover-content').html();
+    }
+  });
+})
+
+</script>
+
+</body>

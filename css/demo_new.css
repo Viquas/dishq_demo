@@ -189,9 +189,8 @@
 #sec3{
   display: none;
 }
-
 #sec4{
-  display: none;
+  /*display: none;*/
 }
 #sec5{
   display: none;
@@ -203,7 +202,7 @@
 .help-msg{
   font-size: 16px;
   padding: 50px 10px;
-  font-family: 'Raleway';
+  font-weight: 300;
   display: none;
 }
 
@@ -258,6 +257,7 @@
 }
 .l-name{
   font-size: 13px;
+  font-weight: 400;
 }
 .l-tags{
   padding: 3px 10px;
@@ -303,4 +303,9 @@
 
 #input_section{
   padding-top:10%;
+}
+.mid-text{
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 10px;
 }

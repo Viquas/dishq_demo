@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');
+/*@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i');*/
 body,p,h1,h2,h3,h4,h5,h6, a, span{
 font-family: 'Roboto-light', sans-serif;
-font-family: 'Playfair Display', serif;
+/*font-family: 'Playfair Display', serif;*/
 color: #454545;
 }
 body{
@@ -188,7 +188,7 @@ td.first{
 }
 .match{
   color: #60737c;
-  padding: 10px 20px ;
+  padding: 10px 0px ;
   letter-spacing: 0.04em;
   margin-bottom: 0px;
   line-height: 20px;
