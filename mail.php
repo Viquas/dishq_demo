@@ -11,7 +11,7 @@
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        'Authorization: Token bcc55eb53b1fb196ab98e1701f911b0a5e9266a0',
+        'Authorization: ',
         ));
     $result = curl_exec($ch);
 
